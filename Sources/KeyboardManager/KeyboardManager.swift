@@ -161,31 +161,31 @@ open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
             right: inputAccessoryView.rightAnchor.constraint(equalTo: superview.rightAnchor)
         ).activate()
 
-        callbacks[.willShow] = { [weak self] (notification) in
-            guard
-                self?.isKeyboardHidden == false,
-                self?.constraints?.bottom?.constant == self?.additionalInputViewBottomConstraintConstant(),
-                notification.isForCurrentApp
-            else { return }
-
-            let keyboardHeight = notification.endFrame.height
-            self?.animateAlongside(notification) {
-                self?.constraints?.bottom?.constant = -keyboardHeight - (additionalBottomSpace?() ?? 0)
-                self?.inputAccessoryView?.superview?.layoutIfNeeded()
-            }
-        }
-        callbacks[.willChangeFrame] = { [weak self] (notification) in
-            let keyboardHeight = notification.endFrame.height
-            guard
-                self?.isKeyboardHidden == false,
-                notification.isForCurrentApp
-            else { return }
-
-            self?.animateAlongside(notification) {
-                self?.constraints?.bottom?.constant = -keyboardHeight - (additionalBottomSpace?() ?? 0)
-                self?.inputAccessoryView?.superview?.layoutIfNeeded()
-            }
-        }
+//        callbacks[.willShow] = { [weak self] (notification) in
+//            guard
+//                self?.isKeyboardHidden == false,
+//                self?.constraints?.bottom?.constant == self?.additionalInputViewBottomConstraintConstant(),
+//                notification.isForCurrentApp
+//            else { return }
+//
+//            let keyboardHeight = notification.endFrame.height
+//            self?.animateAlongside(notification) {
+//                self?.constraints?.bottom?.constant = -keyboardHeight - (additionalBottomSpace?() ?? 0)
+//                self?.inputAccessoryView?.superview?.layoutIfNeeded()
+//            }
+//        }
+//        callbacks[.willChangeFrame] = { [weak self] (notification) in
+//            let keyboardHeight = notification.endFrame.height
+//            guard
+//                self?.isKeyboardHidden == false,
+//                notification.isForCurrentApp
+//            else { return }
+//
+//            self?.animateAlongside(notification) {
+//                self?.constraints?.bottom?.constant = -keyboardHeight - (additionalBottomSpace?() ?? 0)
+//                self?.inputAccessoryView?.superview?.layoutIfNeeded()
+//            }
+//        }
         callbacks[.willHide] = { [weak self] (notification) in
             guard notification.isForCurrentApp else { return }
             self?.animateAlongside(notification) { [weak self] in
@@ -318,9 +318,9 @@ open class KeyboardManager: NSObject, UIGestureRecognizerDelegate {
         }
 
         /// If a tab bar is shown, letting this number becoming > 0 makes it so the accessoryview disappears below the tab bar. setting the max value to 0 prevents that
-        let aboveKeyboardAndAboveTabBar = min(additionalInputViewBottomConstraintConstant(), yCoordinateDirectlyAboveKeyboard)
-        self.constraints?.bottom?.constant = aboveKeyboardAndAboveTabBar
-        self.inputAccessoryView?.superview?.layoutIfNeeded()
+//        let aboveKeyboardAndAboveTabBar = min(additionalInputViewBottomConstraintConstant(), yCoordinateDirectlyAboveKeyboard)
+//        self.constraints?.bottom?.constant = aboveKeyboardAndAboveTabBar
+//        self.inputAccessoryView?.superview?.layoutIfNeeded()
     }
 
     /// Only receive a `UITouch` event when the `scrollView`'s keyboard dismiss mode is interactive
